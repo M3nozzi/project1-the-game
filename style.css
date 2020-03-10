@@ -1,8 +1,8 @@
 body {
     padding: 0;
     text-align: center;
-    /* background-image: url("./img/background-geral.jpg");
-    background-size: cover; */
+    background-image: url("./img/background-general.jpg");
+    background-size: cover;
     background-color: turquoise;
   }
   
@@ -43,6 +43,11 @@ body {
   }
   
   canvas{
-    border: 2px solid white;
+    border: 2px solid transparent;
   }
   
+  #paragraph {
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      font-size: 20px;
+      color: black;
+  }

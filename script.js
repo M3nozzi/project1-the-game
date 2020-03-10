@@ -61,7 +61,7 @@ window.onload = () => {
         }
     }
 
-     //BARBARIAN
+     //BARBARIAN SESSION
 
     class Barbarian {
         constructor(x, y,health) {
@@ -103,29 +103,44 @@ window.onload = () => {
 
     function backgroundChange() {
         
-        if (frames <= 100) {
+        if (frames <= 1000) {
             
             
-         return   backgroundImg.src = "./img/background1.png";
-        } else if (frames > 100 && frames < 299) {
+            return backgroundImg.src = "./img/background1.png";
+            
+        } else if (frames > 1000 && frames < 2500) {
+           
+            
+            backgroundImg.src = "./img/background2.jpg";
+
+        } else if (frames >= 2500 && frames < 3500) {
            
             
             backgroundImg.src = "./img/background3.jpg";
-        } else if (frames >= 300 && frames < 399) {
-           
+
+        } else if (frames >= 3500 &&  frames < 4500) {
             
             backgroundImg.src = "./img/background4.jpg";
-        } else if (frames >= 400 &&  frames < 499) {
-           
+
+        } else if (frames >= 4500 && frames < 5000) {
             
             backgroundImg.src = "./img/background5.png";
-        } else if (frames === 500) {
+
+        } else if (frames === 5000) {
             
             frames = 0;
         }
     }
 
-
+        //SCORE 
+    
+    function score() {
+    var numbers = Math.floor(frames / 10);
+    ctx.font = '29px arial';
+    ctx.fillStyle = 'black';
+    ctx.fillText('SCORE  ' + numbers, 300, 50);
+    };
+  
 
    
 
@@ -155,13 +170,15 @@ window.onload = () => {
         this.y += this.speedY;
       }
     }
-  
 
-    //PLAYER CONTROLER
+  
+    //THE CHARACTERS
 
     let player = new Player(30, 280,5);
     
     let barbarian = new Barbarian(600, 250, 60);
+
+    //PLAYER CONTROLER
   
     document.onkeydown = function(e) {
       switch (e.keyCode) {
@@ -223,10 +240,13 @@ window.onload = () => {
 
     
 
+    // EVERYTHING HAPPENS HERE!
+
     function updateGameFrame(){
         player.newPosition();
         draw();
         fight();
+        score();
         updateObstacles();
         backgroundChange()
         window.requestAnimationFrame(updateGameFrame);
@@ -248,27 +268,9 @@ window.onload = () => {
         else {
             // console.log("not attack")
         }
-        }
-
-    //GAME OVER 
-
-    function checkGameOver() {
-
-        if (player.health <= 0) {
-            window.cancelAnimationFrame(updateGameFrame);
-            // console.log(player.health)
-            drawGameOver();
-          }
-
     }
-
-    function drawGameOver() {
-        let gOverImg = new Image();
-        gOverImg.src = './img/gameover.png';
-        ctx.clearRect(0, 0, 700, 500);
-        ctx.drawImage(gOverImg, 90, 0);
-        
-      }
+    
+    //CHECK WHICH ROCKS HAS CRASHED THE ROMAN SOLDIER TO COUNT THE DAMAGE
     
     let  checkQuest = () => {
         let playerX = player.x; 
@@ -288,14 +290,13 @@ window.onload = () => {
               myObstacles[i].x = 0;
               myObstacles[i].y = 0;
               
-
-            //   checkGameOver();
-            //   console.log('-10 damage')
-              
           }
         }
     };
     
+
+    // COUNT THE ROCKS THAT CRASHED THE SOLDIER TO CHECK DAMAGE AND SUB THE VALUE FROM HEALTH
+
     function checkDamage() {
         
         myObstacles.forEach((obs,idx) => {
@@ -307,13 +308,34 @@ window.onload = () => {
 
     }
 
+
     //START GAME
 
     function startGame() {
         
         window.requestAnimationFrame(updateGameFrame);
         
+    };
 
-    }
+    //GAME OVER 
+
+    function checkGameOver() {
+
+        if (player.health <= 0) {
+            window.cancelAnimationFrame(updateGameFrame);
+            drawGameOver();
+          }
+
+    };
+
+    function drawGameOver() {
+        let gOverImg = new Image();
+        gOverImg.src = './img/gameover.png';
+        ctx.clearRect(0, 0, 700, 500);
+        ctx.drawImage(gOverImg, 90, 0);
+        
+    };
+
+
 };
   
