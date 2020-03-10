@@ -26,6 +26,8 @@ window.onload = () => {
     let barbarianImg = new Image();
     barbarianImg.src = './img/barbarian.png';
 
+    let heartImg = new Image();
+
     //PLAYER SESSION
 
 
@@ -46,7 +48,7 @@ window.onload = () => {
         receiveDamage() {
         
             this.health = this.health - 1;
-            console.log('pedraaa');
+            // console.log('pedraaa');
         }
         
         
@@ -68,7 +70,7 @@ window.onload = () => {
             this.x = x;
             this.y = y;
             this.speedX = 4;
-            this.speedY = 0;
+            // this.speedY = 0;
             this.health = health;
             this.strength = 10;
         }
@@ -144,7 +146,7 @@ window.onload = () => {
 
    
 
-    //OBSTACLE SESSION 
+    //OBSTACLES SESSION 
 
     class Stone {
 
@@ -154,7 +156,6 @@ window.onload = () => {
           
             this.x = x;
             this.y = y;
-           this.strength = 10;
 
         }
 
@@ -174,9 +175,19 @@ window.onload = () => {
   
     //THE CHARACTERS
 
-    let player = new Player(30, 280,5);
+    let player = new Player(30, 280,10);
     
     let barbarian = new Barbarian(600, 250, 60);
+
+    //HEALTH IMAGE CONTROL
+
+    function heart() {
+
+        for (let i = 0; i < health; i ++) {
+          heartImg.src="./img/heart.png";
+          context.drawImage(heartImg,30, 30);s
+        }
+      }
 
     //PLAYER CONTROLER
   
@@ -253,6 +264,7 @@ window.onload = () => {
         checkQuest();
         checkDamage();
         checkGameOver();
+        heart();
 
         
     }
