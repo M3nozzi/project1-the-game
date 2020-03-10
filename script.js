@@ -1,12 +1,18 @@
 window.onload = () => {
     document.getElementById('start-button').onclick = () => {
-      startGame();
-    };
+        startGame();
+    };    //START THE GAME BEFORE CLICK ON THE BUTTON
+
+    
+    //CANVAS
 
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
     let frames = 0;
+    let gameIsRunning = true;
     let myObstacles = [];
+
+    //IMAGES 
 
     let backgroundImg = new Image();
     backgroundImg.src = "./img/background1.png";
@@ -18,28 +24,59 @@ window.onload = () => {
     playerImg.src = "./img/player1.png";
     
     let health = 100;
-  
+
+
+
+    //PLAYER SESSION
+
+
     class Player {
-      constructor (x,y,health){
-        this.x = x;
-        this.y = y;
-        this.speedX = 0;
-          this.speedY = 0;
-          this.health = health;
-      }
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.speedX = 0;
+            this.speedY = 0;
+            this.health = 100;
+        }
     
-  
-      update(ctx){
+        receiveDamage() {
         
-          ctx.drawImage(playerImg,this.x, this.y, 90, 140);
-      }
+            this.health -=10;
+        }
+        
+        
+        update(ctx) {
+        
+            ctx.drawImage(playerImg, this.x, this.y, 90, 140);
+        }
   
-      newPosition() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-      }
+        newPosition() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+        }
     }
   
+    // //CHANGE BACKGROUND
+
+
+    // function backgroundChange() {
+    //     if (frames <= 2000) {
+    //         let backgroundImg = new Image();
+    //         backgroundImg.src = "./img/background2.jpg";
+    //     } else if (frames <= 3000) {
+    //         let backgroundImg = new Image();
+    //         backgroundImg.src = "./img/background3.jpg";
+    //     } else if (frame <= 4000) {
+    //         let backgroundImg = new Image();
+    //         backgroundImg.src = "./img/background4.jpg";
+    //     } else (frames <= 5000) 
+    //         let backgroundImg = new Image();
+    //         backgroundImg.src = "./img/background5.png";
+        
+    // }
+
+
+    //OBSTACLE SESSION 
 
     class Stone {
 
@@ -49,33 +86,16 @@ window.onload = () => {
           
             this.x = x;
             this.y = y;
-            this.strength = 10;
+           this.strength = 10;
 
         }
-    
-        // left() {
-        //     return this.x;
-        //   }
-        //   right() {
-        //     return this.x + this.width;
-        //   }
-        //   top() {
-        //     return this.y;
-        //   }
-        //   bottom() {
-        //     return this.y + this.height;
-        //   }
-        
-        //   crashWith(obstacle) {
-        //     return !(
-        //       this.bottom() < obstacle.top() ||
-        //       this.top() > obstacle.bottom() ||
-        //       this.right() < obstacle.left() ||
-        //       this.left() > obstacle.right()
-        //     );
-        //   }
 
-  
+
+        attack() {
+        
+            return damage = this.strength;
+        }
+
         update(ctx) {
            
         ctx.drawImage(obstacle, this.x, this.y, 80,80);
@@ -89,6 +109,9 @@ window.onload = () => {
       }
     }
   
+
+    //PLAYER CONTROLER
+
     let player = new Player(30,280,100);
   
     document.onkeydown = function(e) {
@@ -116,6 +139,8 @@ window.onload = () => {
       player.speedY = 0;
         
     };
+
+    //DRAW
   
     function draw(){
       ctx.clearRect(0, 0, 700, 500);
@@ -124,6 +149,8 @@ window.onload = () => {
       
     }
   
+    //FALLING OBSTACLES
+
     function updateObstacles() {
   
       for (i = 0; i < myObstacles.length; i++) {
@@ -141,37 +168,65 @@ window.onload = () => {
         myObstacles.push(new Stone(width,10, x,0));
       }
     } 
-  
+
+
     function updateGameFrame(){
-      player.newPosition();
-      draw();
-      updateObstacles();
-      window.requestAnimationFrame(updateGameFrame);
-    
-      checkGameOver();
+        player.newPosition();
+        draw();
+        updateObstacles();
+
+        window.requestAnimationFrame(updateGameFrame);
+        checkDamage();
+        checkGameOver();
+
+        
     }
   
+
+    //GAME OVER 
 
     function checkGameOver() {
 
         if (health <= 0) {
-          drawGameOver();
-        }
+
+            drawGameOver();
+          }
+
       }
 
+      function drawGameOver() {
+        gOverImg.src='./img/gameoverpng';
+        context.drawImage(gOverImg, 350, 250);
+      }
+    
+    let  checkDamage = () => {
+        let playerX = player.x; 
+        let playerY = player.y;
+        let playerXW = player.x + player.width;
+        let playerYH = player.y + player.height;
+      
+       
+        for (let i = 0; i < myObstacles.length; i++) {
+          let obstacleX = myObstacles[i].positionX;
+          let obstacleY = myObstacles[i].positionY;
+          let obstacleXW = myObstacles[i].positionX + obstacle[i].width;
+          let obstacleYH = myObstacles[i].positionY + obstacle[i].height;
+      
+          if (playerXW > obstacleX && playerX < obstacleXW && playerYH > obstacleY && playerY < obstacleYH) {
+            
+              player.receiveDamage();
+              
+          }
+        }
+      };
 
-    function crashed() {
-        if(obstacle.y + 10 == player.y - 10){
-            player.health -= obstacle.strength;
-            console.log(player.health)
-        }
-        else {
-            console.log("not")
-        }
-        }
+
+    //START GAME
 
     function startGame() {
         
-      window.requestAnimationFrame(updateGameFrame);
+        window.requestAnimationFrame(updateGameFrame);
+        
+
     }
   };
