@@ -10,27 +10,69 @@ window.onload = () => {
     let ctx = canvas.getContext('2d');
     let frames = 0;
     let myObstacles = [];
+    let myCoins = [];
 
     //IMAGES 
 
+        //BACKGROUND IMAGE
+    
     let backgroundImg = new Image();
     // backgroundImg.src = "./img/background1.png";
 
+        //ROCK IMAGE
+    
     let obstacle = new Image();
     obstacle.src = "./img/rock.png";
 
+
+        //ROMAN SOLDIER IMAGE
+    
     let playerImg = new Image();
     playerImg.src = "./img/player1.png";
 
-
+        //BARBARIAN SOLDIER IMAGE
+    
     let barbarianImg = new Image();
     barbarianImg.src = './img/barbarian.png';
 
+        // HEALTH SYMBOL IMAGE
+    
     let heartImg = new Image();
+    heartImg.src = './img/heart.png';
 
-    //PLAYER SESSION
+        // COIN BONUS IMAGE
+    
+    let coin = new Image();
+    coin.src = './img/coin.png';
+    
+    //AUDIOS 
+
+    //AUDIO GAME
+
+    const audio = new Audio();
+    // audio.src = './img/xxxxxxx';
+    audio.volume = 0.3;
+
+    //AUDIO CRASHED 
+    const audioStone = new Audio();
+    // audioStone.src = './img/xxxxx';
+    audioStone.volume = 0.2;
+    
+    //AUDIO BONUS COIN
+    const audioCoin = new Audio();
+    // audioCoin.src = './img/xxxxx';
+    audioCoin.volume = 0.2;
+
+    //AUDIO GAME OVER
+    const audioGameOver = new Audio();
+    // audioGameOver.src = './img/xxxxxxxx';
+    audioGameOver.volume = 0.5;
+    
 
 
+
+    //ROMAN SOLDIER PLAYER SESSION
+        
     class Player {
         constructor(x, y, health) {
             this.x = x;
@@ -38,20 +80,61 @@ window.onload = () => {
             this.speedX = 0;
             this.speedY = 0;
             this.health = health;
-            this.strength = 20;
+            // this.strength = 20;
         }
 
-        attack(){
-            return this.strength;
-        }
+        // attack(){
+        //     return this.strength;
+        // }
     
+
+        //ROMAN SOLDIER RECEIVES DEMAGE
+
         receiveDamage() {
         
+            // audioStone.play();
+    
             this.health = this.health - 1;
-            // console.log('pedraaa');
+            console.log('pedraaa');
         }
         
+        //ROMAN SOLDIER GETS BONUS HEALTH
+
+        receiveBonus() {
+
+            // audioCoins.play();
         
+            this.health = this.health + 5;
+
+            console.log('$$$$$')
+        
+            status = this.health;
+            ctx.font = '29px arial';
+            ctx.fillStyle = 'black';
+            ctx.fillText('Health ' + status, 200, 50);
+
+            if (status <= 5) {
+                
+            ctx.font = '29px arial';
+            ctx.fillStyle = 'red';
+            ctx.fillText('Health ' + status, 200, 50);
+
+            };
+
+        }
+
+        
+    //     //HEALTH STATUS
+    
+    //   statusHealth() {
+    //     var status = this.health;
+    //     ctx.font = '29px arial';
+    //     ctx.fillStyle = 'black';
+    //     ctx.fillText('Health ' + status, 200, 50);
+    //   };
+
+            //UPDATE
+    
         update(ctx) {
         
             ctx.drawImage(playerImg, this.x, this.y, 90, 140);
@@ -62,6 +145,10 @@ window.onload = () => {
             this.y += this.speedY;
         }
     }
+
+
+
+
 
      //BARBARIAN SESSION
 
@@ -146,7 +233,8 @@ window.onload = () => {
 
    
 
-    //OBSTACLES SESSION 
+    //OBSTACLES SESSION - ROCKS
+
 
     class Stone {
 
@@ -172,22 +260,17 @@ window.onload = () => {
       }
     }
 
-  
+
+
+
     //THE CHARACTERS
 
     let player = new Player(30, 280,10);
     
     let barbarian = new Barbarian(600, 250, 60);
 
-    //HEALTH IMAGE CONTROL
 
-    function heart() {
-
-        for (let i = 0; i < health; i ++) {
-          heartImg.src="./img/heart.png";
-          context.drawImage(heartImg,30, 30);s
-        }
-      }
+   
 
     //PLAYER CONTROLER
   
@@ -201,12 +284,12 @@ window.onload = () => {
         case 68: // right d
           player.speedX += 1;
               break;
-        case 83: // down s 
-          player.speedY += 1;
-              break;
-        case 87: // up w
-        player.speedY -= 1;
-        break;
+        // case 83: // down s 
+        //   player.speedY += 1;
+        //       break;
+        // case 87: // up w
+        // player.speedY -= 1;
+        // break;
         
       }
     };
@@ -221,7 +304,7 @@ window.onload = () => {
   
     function draw(){
       ctx.clearRect(0, 0, 700, 500);
-      ctx.drawImage(backgroundImg, 0, 0, 700, 500);
+      ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
       player.update(ctx);
       barbarian.update(ctx);
       
@@ -229,7 +312,7 @@ window.onload = () => {
 
 
   
-    //FALLING OBSTACLES
+    //FALLING OBSTACLES - ROCKS
 
     function updateObstacles() {
   
@@ -249,6 +332,132 @@ window.onload = () => {
       }
     } 
 
+
+        //CHECK WHICH ROCKS HAS CRASHED THE ROMAN SOLDIER TO COUNT THE DAMAGE
+    
+        let  checkQuest = () => {
+            let playerX = player.x; 
+            let playerY = player.y;
+            let playerXW = player.x + 90;
+            let playerYH = player.y + 140;
+          
+           
+            for (let i = 0; i < myObstacles.length; i++) {
+              let obstacleX = myObstacles[i].x;
+              let obstacleY = myObstacles[i].y;
+              let obstacleXW = myObstacles[i].x + 80;
+              let obstacleYH = myObstacles[i].y + 80;
+          
+              if (playerXW > obstacleX && playerX < obstacleXW && playerYH > obstacleY && playerY < obstacleYH) {
+                
+                  myObstacles[i].x = 0;
+                  myObstacles[i].y = 0;
+                  
+              }
+            }
+        };
+        
+    
+        // COUNT THE ROCKS THAT CRASHED THE SOLDIER TO CHECK DAMAGE AND SUB THE VALUE FROM HEALTH
+    
+        function checkDamage() {
+            
+            myObstacles.forEach((obs,idx) => {
+                if (obs.x === 0 && obs.y === 0) {
+                    myObstacles.splice(idx,1)
+                    player.receiveDamage();
+                }
+            })
+    
+        }
+
+    
+     //COINS  SESSION - BONUS HEALTH
+
+     class Coins {
+
+        constructor(width, heigth, x, y) {
+            this.width = width;
+            this.height = heigth;
+          
+            this.x = x;
+            this.y = y;
+            this.speedX = 800;
+            this.speedY = 800;
+        }
+
+        update(ctx) {
+           
+        ctx.drawImage(coin, this.x, this.y, 20,20);
+        
+        }
+    
+  
+      newPosition() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+      }
+    }
+
+   //FALLING COINS - BONUS HEALTH
+
+   function updateCoins() {
+  
+    for (i = 0; i < myCoins.length; i++) {
+        myCoins[i].y += 5;
+        myCoins[i].update(ctx);
+    }
+
+    frames += 20;
+    if (frames % 150 === 0) {
+      let randomPos = canvas.width;
+      let x = Math.floor(Math.random() * randomPos);
+      let mindWidth = 10;
+      let maxWidth =  10;
+      let width = Math.floor(Math.random() * (maxWidth - mindWidth + 1) + mindWidth);
+      myCoins.push(new Coins(width,10, x,0));
+    }
+  } 
+    
+    
+    //CHECK IF THE SOLDIER GOT A COIN
+    
+    let  checkQuest2 = () => {
+        let playerX = player.x; 
+        let playerY = player.y;
+        let playerXW = player.x + 60;
+        let playerYH = player.y + 90;
+      
+       
+        for (let i = 0; i < myCoins.length; i++) {
+          let coinX = myCoins[i].x;
+          let coinY = myCoins[i].y;
+          let coinXW = myCoins[i].x + 40;
+          let coinYH = myCoins[i].y + 40;
+      
+          if (playerXW > coinX && playerX < coinXW && playerYH > coinY && playerY < coinYH) {
+            
+              myCoins[i].x = 0;
+              myCoins[i].y = 0;
+              
+          }
+        }
+    };
+    
+
+    // COUNT THE COINS THAT THE SOLDIER  HAD GOTTEN TO CHECK BONUS AND ADD THE VALUE TO HIS HEALTH STATUS
+
+    function checkGetCoin() {
+        
+        myCoins.forEach((coin,i) => {
+            if (coin.x === 0 && coin.y === 0) {
+                myCoins.splice(i,1)
+                player.receiveBonus();
+            }
+        })
+
+    }
+
     
 
     // EVERYTHING HAPPENS HERE!
@@ -258,17 +467,30 @@ window.onload = () => {
         draw();
         fight();
         score();
+        // statusHealth();
         updateObstacles();
+        updateCoins();
         backgroundChange()
+        //audio.play();
         window.requestAnimationFrame(updateGameFrame);
         checkQuest();
         checkDamage();
+        checkQuest2();
+        checkGetCoin();
         checkGameOver();
-        heart();
-
+        
         
     }
   
+
+    // CHANGE FALLING DAMAGE TO BONUS
+
+    // function changeFall() {
+        
+    //     if()
+
+
+    // };
 
     //BATTLE
 
@@ -282,43 +504,7 @@ window.onload = () => {
         }
     }
     
-    //CHECK WHICH ROCKS HAS CRASHED THE ROMAN SOLDIER TO COUNT THE DAMAGE
-    
-    let  checkQuest = () => {
-        let playerX = player.x; 
-        let playerY = player.y;
-        let playerXW = player.x + 90;
-        let playerYH = player.y + 140;
-      
-       
-        for (let i = 0; i < myObstacles.length; i++) {
-          let obstacleX = myObstacles[i].x;
-          let obstacleY = myObstacles[i].y;
-          let obstacleXW = myObstacles[i].x + 80;
-          let obstacleYH = myObstacles[i].y + 80;
-      
-          if (playerXW > obstacleX && playerX < obstacleXW && playerYH > obstacleY && playerY < obstacleYH) {
-            
-              myObstacles[i].x = 0;
-              myObstacles[i].y = 0;
-              
-          }
-        }
-    };
-    
 
-    // COUNT THE ROCKS THAT CRASHED THE SOLDIER TO CHECK DAMAGE AND SUB THE VALUE FROM HEALTH
-
-    function checkDamage() {
-        
-        myObstacles.forEach((obs,idx) => {
-            if (obs.x === 0 && obs.y === 0) {
-                myObstacles.splice(idx,1)
-                player.receiveDamage();
-            }
-        })
-
-    }
 
 
     //START GAME
@@ -341,11 +527,15 @@ window.onload = () => {
     };
 
     function drawGameOver() {
+        // audio.pause();
+        // audioGameOver.play();
         let gOverImg = new Image();
         gOverImg.src = './img/gameover.png';
-        ctx.clearRect(0, 0, 700, 500);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(gOverImg, 90, 0);
-        
+        setInterval(() => {
+            window.location.reload();
+          }, 1500);
     };
 
 
