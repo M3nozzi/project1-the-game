@@ -1,5 +1,5 @@
 window.onload = () => {
-    document.getElementById('start-button').onclick = () => {      
+    document.getElementById('start-button').onclick = (event) => {      
     
         startGame();
     };    //START THE GAME BEFORE CLICK ON THE BUTTON
