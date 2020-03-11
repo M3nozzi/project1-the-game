@@ -60,9 +60,9 @@ window.onload = () => {
     audioStone.volume = 0.5;
     
     //AUDIO BONUS COIN
-    const audioCoin = new Audio();
-    audioCoin.src = './img/audioCoin.wav';
-    audioCoin.volume = 0.5;
+    const audioCoins = new Audio();
+    audioCoins.src = './img/audioCoin.wav';
+    audioCoins.volume = 0.5;
 
     //AUDIO GAME OVER
     const audioGameOver = new Audio();
@@ -101,33 +101,35 @@ window.onload = () => {
 
             audioCoins.play();
         
-            this.health = this.health + 5;
+            this.health = this.health +3;
 
-            // console.log('$$$$$')
+            console.log('$$$$$')
         
-            status = this.health;
-            ctx.font = '29px arial';
-            ctx.fillStyle = 'black';
-            ctx.fillText('Health ' + status, 200, 50);
-
-            if (status <= 5) {
-                
-            ctx.font = '29px arial';
-            ctx.fillStyle = 'red';
-            ctx.fillText('Health ' + status, 200, 50);
-
-            };
-
         }
 
         
-    //     //HEALTH STATUS
+        //HEALTH STATUS
     
       statusHealth() {
         var status = this.health;
         ctx.font = '29px arial';
         ctx.fillStyle = 'black';
-        ctx.fillText('Health ' + status, 200, 50);
+          ctx.fillText('Health ' + status, 100, 50);
+          
+           if (status <= 5) {
+                
+            ctx.font = '29px arial';
+            ctx.fillStyle = 'red';
+            ctx.fillText('Health ' + status, 100, 50);
+
+           } else if (status === 1) {
+               
+            ctx.font = '29px arial';
+            ctx.fillStyle = 'red';
+            ctx.fillText('Health ' + status + 'Im gonna DIE!!!!', 100, 50);
+               
+          }
+          
       };
 
         
@@ -191,7 +193,7 @@ window.onload = () => {
     function moveBarbarian() {
         
         barbarian.newPosition();
-        barbarian.update();
+        barbarian.update(ctx);
     }
 
    
@@ -353,8 +355,6 @@ window.onload = () => {
         // setTimeout( player.speedY *= 0.5, 500);
       };
    
-
-
     
     document.onkeyup = function(e) {
       player.speedX = 0;
@@ -499,9 +499,9 @@ window.onload = () => {
       
           if (playerXW > coinX && playerX < coinXW && playerYH > coinY && playerY < coinYH) {
             
-              myCoins[i].x = 0;
-              myCoins[i].y = 0;
-              
+              myCoins[i].width = 0;
+              myCoins[i].height = 0;
+              console.log(myCoins);
           }
         }
     };
@@ -512,9 +512,10 @@ window.onload = () => {
     function checkGetCoin() {
         
         myCoins.forEach((coin,i) => {
-            if (coin.x === 0 && coin.y === 0) {
+            if (coin.width === 0 && coin.height=== 0) {
                 myCoins.splice(i,1)
                 player.receiveBonus();
+                console.log('iiiii');
             }
         })
 
@@ -528,18 +529,20 @@ window.onload = () => {
         player.newPosition();
         draw();
         score();
-        player.statusHealth();
         updateObstacles();
         updateCoins();
+        checkGetCoin();
         backgroundChange()
         //audio.play();
+        player.statusHealth();
         window.requestAnimationFrame(updateGameFrame);
         checkQuest();
         checkDamage();
         checkQuest2();
-        checkGetCoin();
+        
         checkGameOver();
         moveBarbarian();
+        
         
         
     };
