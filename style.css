@@ -26,7 +26,7 @@ body {
     width: 300px;
   }
   
-  body button {
+  #start-button{
     font-size: 30px;
     background-color: #870007;
     color: #fff;
@@ -51,3 +51,29 @@ body {
       font-size: 20px;
       color: black;
   }
+
+  #buttonMoveLeft{
+    /* float: left;
+    position:center; */
+    justify-content: center;
+    padding: 20px 40px;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: #870007;
+    color: white;
+}
+
+  #buttonMoveRight{
+    /* float: left;
+    position: absolute; */
+    justify-content: center;
+    padding: 20px 40px;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: #870007;
+    color: white;
+}

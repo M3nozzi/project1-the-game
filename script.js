@@ -1,5 +1,6 @@
 window.onload = () => {
-    document.getElementById('start-button').onclick = () => {
+    document.getElementById('start-button').onclick = () => {      
+    
         startGame();
     };    //START THE GAME BEFORE CLICK ON THE BUTTON
 
@@ -55,17 +56,17 @@ window.onload = () => {
 
     //AUDIO CRASHED 
     const audioStone = new Audio();
-    // audioStone.src = './img/xxxxx';
-    audioStone.volume = 0.2;
+    audioStone.src = './img/audioRock.wav';
+    audioStone.volume = 0.5;
     
     //AUDIO BONUS COIN
     const audioCoin = new Audio();
-    // audioCoin.src = './img/xxxxx';
-    audioCoin.volume = 0.2;
+    audioCoin.src = './img/audioCoin.wav';
+    audioCoin.volume = 0.5;
 
     //AUDIO GAME OVER
     const audioGameOver = new Audio();
-    // audioGameOver.src = './img/xxxxxxxx';
+    audioGameOver.src = './img/gameOver.mp3';
     audioGameOver.volume = 0.5;
     
 
@@ -80,33 +81,29 @@ window.onload = () => {
             this.speedX = 0;
             this.speedY = 0;
             this.health = health;
-            // this.strength = 20;
         }
 
-        // attack(){
-        //     return this.strength;
-        // }
     
 
         //ROMAN SOLDIER RECEIVES DEMAGE
 
         receiveDamage() {
         
-            // audioStone.play();
+            audioStone.play();
     
             this.health = this.health - 1;
-            console.log('pedraaa');
+            // console.log('pedraaa');
         }
         
         //ROMAN SOLDIER GETS BONUS HEALTH
 
         receiveBonus() {
 
-            // audioCoins.play();
+            audioCoins.play();
         
             this.health = this.health + 5;
 
-            console.log('$$$$$')
+            // console.log('$$$$$')
         
             status = this.health;
             ctx.font = '29px arial';
@@ -133,6 +130,9 @@ window.onload = () => {
     //     ctx.fillText('Health ' + status, 200, 50);
     //   };
 
+        
+        
+        
             //UPDATE
     
         update(ctx) {
@@ -153,25 +153,13 @@ window.onload = () => {
      //BARBARIAN SESSION
 
     class Barbarian {
-        constructor(x, y,health) {
+        constructor(x, y) {
             this.x = x;
             this.y = y;
             this.speedX = 4;
-            // this.speedY = 0;
-            this.health = health;
-            this.strength = 10;
-        }
-    
-        receiveDamage() {
-        
-            this.health = this.health - 20;
-            
-        }
-
-        attack(){
-            return this.strength;
-        }
-        
+           
+           
+        }    
         
         update(ctx) {
 
@@ -179,43 +167,65 @@ window.onload = () => {
         }
   
         newPosition() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-        }
+            if (frames % 70 === 0) {
+                this.x -= this.speedX;
+                
+            }
+
+            if (barbarian.x <= 0) {
+                barbarian.speedX -=2;
+            } else {
+                barbarian.speedX += 2;
+            }
+            if (barbarian.x >= 400) {
+                barbarian.speedX += 2;
+            } else {
+              barbarian.speedX -= 2;
+            }
+         }
+  
+    }
+
+    //BARBARIAN ANIMATION
+
+    function moveBarbarian() {
+        
+        barbarian.newPosition();
+        barbarian.update();
     }
 
    
   
-    // //CHANGE BACKGROUND
+    //CHANGE BACKGROUND
 
     
 
     function backgroundChange() {
         
-        if (frames <= 1000) {
+        if (frames <= 6000) {
             
             
             return backgroundImg.src = "./img/background1.png";
             
-        } else if (frames > 1000 && frames < 2500) {
+        } else if (frames > 6000 && frames < 18000) {
            
             
             backgroundImg.src = "./img/background2.jpg";
 
-        } else if (frames >= 2500 && frames < 3500) {
+        } else if (frames >= 18000 && frames < 30000) {
            
             
             backgroundImg.src = "./img/background3.jpg";
 
-        } else if (frames >= 3500 &&  frames < 4500) {
+        } else if (frames >= 30000 &&  frames < 35000) {
             
             backgroundImg.src = "./img/background4.jpg";
 
-        } else if (frames >= 4500 && frames < 5000) {
+        } else if (frames >= 35000 && frames < 40000) {
             
             backgroundImg.src = "./img/background5.png";
 
-        } else if (frames === 5000) {
+        } else if (frames === 40000) {
             
             frames = 0;
         }
@@ -265,34 +275,86 @@ window.onload = () => {
 
     //THE CHARACTERS
 
-    let player = new Player(30, 280,10);
+    let player = new Player(30, 335,10);
     
-    let barbarian = new Barbarian(600, 250, 60);
+    
+    let barbarian = new Barbarian(600, 300, 60);
 
 
    
 
     //PLAYER CONTROLER
+
+    
+    let buttonMoveRight = document.getElementById('buttonMoveRight');
+    let buttonMoveLeft = document.getElementById('buttonMoveLeft');
+  
+
   
     document.onkeydown = function(e) {
       switch (e.keyCode) {
-        case 65: // left a
-              player.speedX -= 1;
-            //   console.log('left');
-            //   console.log(player.speedX)
+          case 65: // left 
+              if (player.x <= 0) {
+                  player.speedX +=2;
+              } else {
+                  player.speedX -= 2;
+              }
           break;
-        case 68: // right d
-          player.speedX += 1;
+          case 68: // right d
+              if (player.x >= 600) {
+                  player.speedX -= 2;
+              } else {
+                player.speedX += 2;
+              }
               break;
-        // case 83: // down s 
-        //   player.speedY += 1;
-        //       break;
+        //  case 83: // down s 
+        
+        // if (player.y <= 30) {
+        //     player.speedY -= 2;
+        // } else {
+        //     player.speedY += 1;
+        // }
+        //      break;
         // case 87: // up w
-        // player.speedY -= 1;
-        // break;
+             
+        // if (player.y >=500){
+        //     player.speedY += 2;
+        // } else {
+        //     player.speedY -= 1;
+        // }
+        //   break;
         
       }
     };
+
+    buttonMoveLeft.onclick = (event) => {
+        if (player.x <= 0) {
+            player.speedX +=2;
+        } else {
+            player.speedX -= 1;
+        }
+        // player.speedX -= 1;
+        event.target.disabled = true;
+        event.target.disabled = false;
+        setTimeout( player.speedX *= 0.5, 500);
+        // setTimeout( player.speedY *= 0.5, 500);
+      };
+    
+    buttonMoveRight.onclick = (event) => {
+        if (player.x >= 600) {
+            player.speedX -= 2;
+        } else {
+          player.speedX += 1;
+        }
+        // player.speedX += 1;
+        event.target.disabled = true;
+        event.target.disabled = false;
+        setTimeout( player.speedX *= 0.5, 500);
+        // setTimeout( player.speedY *= 0.5, 500);
+      };
+   
+
+
     
     document.onkeyup = function(e) {
       player.speedX = 0;
@@ -310,7 +372,7 @@ window.onload = () => {
       
     }
 
-
+  
   
     //FALLING OBSTACLES - ROCKS
 
@@ -465,7 +527,6 @@ window.onload = () => {
     function updateGameFrame(){
         player.newPosition();
         draw();
-        fight();
         score();
         // statusHealth();
         updateObstacles();
@@ -478,34 +539,11 @@ window.onload = () => {
         checkQuest2();
         checkGetCoin();
         checkGameOver();
+        moveBarbarian();
         
         
-    }
+    };
   
-
-    // CHANGE FALLING DAMAGE TO BONUS
-
-    // function changeFall() {
-        
-    //     if()
-
-
-    // };
-
-    //BATTLE
-
-    function fight() {
-        if(barbarian.x + 10 == player.x - 10){
-            player.health -= barbarian.strength
-            console.log(player.health)
-        } 
-        else {
-            // console.log("not attack")
-        }
-    }
-    
-
-
 
     //START GAME
 
@@ -527,8 +565,8 @@ window.onload = () => {
     };
 
     function drawGameOver() {
-        // audio.pause();
-        // audioGameOver.play();
+        audio.pause();
+        audioGameOver.play();
         let gOverImg = new Image();
         gOverImg.src = './img/gameover.png';
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -537,6 +575,8 @@ window.onload = () => {
             window.location.reload();
           }, 1500);
     };
+
+ 
 
 
 };
