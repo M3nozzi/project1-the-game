@@ -9,21 +9,44 @@
     <title>Survive the Battle!!</title>
   </head>
   <body>
+      <div class="flex-container">
+
+
     <div class="game-intro">
       <img src="./img/roman-logo.png" alt="" class="logo-img" />
       <br />
-      <button id="start-button">StartGame</button>
-      <p id="paragraph">Use A and D OR the buttons to help the Roman soldier to survive the war!</p>
+      <button id="start-button">Start Game</button>
+      <p>Use A and D OR the buttons to help the Roman soldier to survive the war!</p>
       <button id="buttonMoveLeft">LEFT</button>
       <button id="buttonMoveRight">RIGHT</button>
-      <button button type="button" class="btn btn-success" id="resetButton"> RESET</button>
-      <!-- <img src="./img/keyboard-img.png" alt="" class="wasd-img" /> -->
+      <!-- <button button type="button" class="btn btn-success" id="resetButton"> RESET</button> -->
     </div>
 
     <div id="game-board">
       <canvas id="canvas" width="700" height="500"></canvas>  
     </div>
 
+    </div>
+
+
+    <style>
+        .left, .right {
+          float: left;
+          width: 20%; /* The width is 20%, by default */
+        }
+        
+        .main {
+          float: left;
+          width: 60%; /* The width is 60%, by default */
+        }
+        
+        /* Use a media query to add a breakpoint at 800px: */
+        @media screen and (max-width: 800px) {
+          .left, .main, .right {
+            width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+          }
+        }
+        </style>
     <script type="text/javascript" src="script.js"></script>
   </body>
 </html>

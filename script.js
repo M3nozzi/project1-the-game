@@ -123,12 +123,12 @@ window.onload = () => {
         
     //     //HEALTH STATUS
     
-    //   statusHealth() {
-    //     var status = this.health;
-    //     ctx.font = '29px arial';
-    //     ctx.fillStyle = 'black';
-    //     ctx.fillText('Health ' + status, 200, 50);
-    //   };
+      statusHealth() {
+        var status = this.health;
+        ctx.font = '29px arial';
+        ctx.fillStyle = 'black';
+        ctx.fillText('Health ' + status, 200, 50);
+      };
 
         
         
@@ -528,7 +528,7 @@ window.onload = () => {
         player.newPosition();
         draw();
         score();
-        // statusHealth();
+        player.statusHealth();
         updateObstacles();
         updateCoins();
         backgroundChange()

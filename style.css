@@ -1,11 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Oxanium&display=swap');
 body {
     padding: 0;
     text-align: center;
-    background-image: url("./img/background-general.jpg");
+    background-image: url("./img/newBackgroundGeneral.jpg");
     background-size: cover;
     background-color: turquoise;
+    font-family: 'Oxanium', cursive;
+    
   }
-  
+  .flex-container{
+
+    display:flex;
+    flex-direction:row;
+
+  }
   .game-intro {
     float: left;
     padding: 0% 10%;
@@ -13,7 +21,9 @@ body {
   
   .game-intro p {
     font-size: 18px;
-    font-family: "Verdana"
+    color: white;
+    font-weight: 600;
+    
   }
   
   .logo-img {
@@ -22,13 +32,11 @@ body {
     margin-top: 30px;
   }
   
-  .wasd-img {
-    width: 300px;
-  }
   
   #start-button{
     font-size: 30px;
     background-color: #870007;
+    font-family: 'Oxanium', cursive;
     color: #fff;
     padding: 20px 40px;
     border: 0;
@@ -43,14 +51,9 @@ body {
   }
   
   canvas{
-    border: 2px solid transparent;
+    border: 2px solid white;
   }
   
-  #paragraph {
-      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-      font-size: 20px;
-      color: black;
-  }
 
   #buttonMoveLeft{
     /* float: left;
@@ -62,6 +65,8 @@ body {
     border-radius: 5px;
     margin-bottom: 20px;
     background-color: #870007;
+    font-size: 20px;
+    font-family: 'Oxanium', cursive;
     color: white;
 }
 
@@ -75,5 +80,7 @@ body {
     border-radius: 5px;
     margin-bottom: 20px;
     background-color: #870007;
+    font-size: 20px;
+    font-family: 'Oxanium', cursive;
     color: white;
 }
