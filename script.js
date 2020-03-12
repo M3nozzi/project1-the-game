@@ -112,19 +112,19 @@ window.onload = () => {
     
       statusHealth() {
         var status = this.health;
-        ctx.font = '29px arial';
+        ctx.font = '29px Oxanium';
         ctx.fillStyle = 'black';
           ctx.fillText('Health ' + status, 100, 50);
           
            if (status <= 5) {
                 
-            ctx.font = '29px arial';
+            ctx.font = '29px Oxanium';
             ctx.fillStyle = 'red';
             ctx.fillText('Health ' + status, 100, 50);
 
            } else if (status === 1) {
                
-            ctx.font = '29px arial';
+            ctx.font = '29px Oxanium';
             ctx.fillStyle = 'red';
             ctx.fillText('Health ' + status + 'Im gonna DIE!!!!', 100, 50);
                
@@ -237,7 +237,7 @@ window.onload = () => {
     
     function score() {
     var numbers = Math.floor(frames / 10);
-    ctx.font = '29px arial';
+    ctx.font = '29px Oxanium';
     ctx.fillStyle = 'black';
     ctx.fillText('SCORE  ' + numbers, 300, 50);
     };
