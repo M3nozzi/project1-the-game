@@ -101,9 +101,9 @@ body {
     }
 }
 
-@media screen and (max-width:320px){
+@media screen and (max-width:568x){
 
     #flex-container{
-        width: 320px;
+        width: 568px;
     }
 }

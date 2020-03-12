@@ -1,4 +1,7 @@
 window.onload = () => {
+
+
+     
     document.getElementById('start-button').onclick = (event) => {      
     
         startGame();
@@ -12,6 +15,8 @@ window.onload = () => {
     let frames = 0;
     let myObstacles = [];
     let myCoins = [];
+    let testImg = new Image();
+    testImg.src = './img/roman-logo.png';
 
     //IMAGES 
 
@@ -91,7 +96,7 @@ window.onload = () => {
         
             audioStone.play();
     
-            this.health = this.health - 1;
+            this.health = this.health - 3;
             // console.log('pedraaa');
         }
         
@@ -101,9 +106,9 @@ window.onload = () => {
 
             audioCoins.play();
         
-            this.health = this.health +3;
+            this.health = this.health +1;
 
-            console.log('$$$$$')
+            // console.log('$$$$$')
         
         }
 
@@ -116,7 +121,7 @@ window.onload = () => {
         ctx.fillStyle = 'black';
           ctx.fillText('Health ' + status, 100, 50);
           
-           if (status <= 5) {
+           if (status <= 5 && status > 1) {
                 
             ctx.font = '29px Oxanium';
             ctx.fillStyle = 'red';
@@ -126,8 +131,10 @@ window.onload = () => {
                
             ctx.font = '29px Oxanium';
             ctx.fillStyle = 'red';
-            ctx.fillText('Health ' + status + 'Im gonna DIE!!!!', 100, 50);
-               
+            ctx.fillText('Health ' + status, 100, 50);
+            ctx.font = '15px Oxanium';
+            ctx.fillStyle = 'red';
+            ctx.fillText('I am gonna DIE!!!!',100, 70);
           }
           
       };
@@ -236,7 +243,7 @@ window.onload = () => {
         //SCORE 
     
     function score() {
-    var numbers = Math.floor(frames / 10);
+    var numbers = Math.floor(frames / 1000);
     ctx.font = '29px Oxanium';
     ctx.fillStyle = 'black';
     ctx.fillText('SCORE  ' + numbers, 300, 50);
@@ -325,6 +332,7 @@ window.onload = () => {
         //     player.speedY -= 1;
         // }
         //   break;
+          case 32: startGame();
         
       }
     };
@@ -501,7 +509,7 @@ window.onload = () => {
             
               myCoins[i].width = 0;
               myCoins[i].height = 0;
-              console.log(myCoins);
+            //   console.log(myCoins);
           }
         }
     };
@@ -515,7 +523,7 @@ window.onload = () => {
             if (coin.width === 0 && coin.height=== 0) {
                 myCoins.splice(i,1)
                 player.receiveBonus();
-                console.log('iiiii');
+                // console.log('iiiii');
             }
         })
 
@@ -535,25 +543,25 @@ window.onload = () => {
         backgroundChange()
         //audio.play();
         player.statusHealth();
+        moveBarbarian();
         window.requestAnimationFrame(updateGameFrame);
         checkQuest();
         checkDamage();
         checkQuest2();
-        
         checkGameOver();
-        moveBarbarian();
+        
         
         
         
     };
-  
+    
 
     //START GAME
 
     function startGame() {
-        
+      
         window.requestAnimationFrame(updateGameFrame);
-        
+       
     };
 
     //GAME OVER 
@@ -574,9 +582,10 @@ window.onload = () => {
         gOverImg.src = './img/gameover.png';
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(gOverImg, 90, 0);
-        setInterval(() => {
-            window.location.reload();
-          }, 1500);
+
+        // setInterval(() => {
+        //     window.location.reload();
+        //   }, 700);
     };
 
  
