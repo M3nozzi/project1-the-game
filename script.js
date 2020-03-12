@@ -603,12 +603,23 @@ window.onload = () => {
     };   
 
 
-    function restart() {
+    function restart() { 
     
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (drawGameOver) {
+            
+            player.x = 30;
+            player.y = 335;
+            player.health= 10;
+            barbarian.x = 600;
+            barbarian.y = 270;
+            frame = 0;
+            myObstacles = [];
+            myCoins = [];
+
+            startGame();
+        }
         
-        startGame();
-}
+    }
 
 };
 
