@@ -1,12 +1,12 @@
 window.onload = () => {
 
 
-     
+
     document.getElementById('start-button').onclick = (event) => {      
     
         startGame();
     };    //START THE GAME BEFORE CLICK ON THE BUTTON
-
+  
     
     //CANVAS
 
@@ -15,9 +15,7 @@ window.onload = () => {
     let frames = 0;
     let myObstacles = [];
     let myCoins = [];
-    let testImg = new Image();
-    testImg.src = './img/roman-logo.png';
-
+   
     //IMAGES 
 
         //BACKGROUND IMAGE
@@ -34,17 +32,12 @@ window.onload = () => {
         //ROMAN SOLDIER IMAGE
     
     let playerImg = new Image();
-    playerImg.src = "./img/player1.png";
+    playerImg.src = "./img/cuphead.png";
 
         //BARBARIAN SOLDIER IMAGE
     
     let barbarianImg = new Image();
-    barbarianImg.src = './img/barbarian.png';
-
-        // HEALTH SYMBOL IMAGE
-    
-    let heartImg = new Image();
-    heartImg.src = './img/heart.png';
+    barbarianImg.src = './img/enemy.png';
 
         // COIN BONUS IMAGE
     
@@ -56,7 +49,7 @@ window.onload = () => {
     //AUDIO GAME
 
     const audio = new Audio();
-    // audio.src = './img/xxxxxxx';
+    audio.src = './img/audio.mp3';
     audio.volume = 0.3;
 
     //AUDIO CRASHED 
@@ -77,7 +70,7 @@ window.onload = () => {
 
 
 
-    //ROMAN SOLDIER PLAYER SESSION
+    //PLAYER SESSION
         
     class Player {
         constructor(x, y, health) {
@@ -90,7 +83,7 @@ window.onload = () => {
 
     
 
-        //ROMAN SOLDIER RECEIVES DEMAGE
+        //PLAYER RECEIVES DEMAGE
 
         receiveDamage() {
         
@@ -100,7 +93,7 @@ window.onload = () => {
             // console.log('pedraaa');
         }
         
-        //ROMAN SOLDIER GETS BONUS HEALTH
+        //PLAYER GETS BONUS HEALTH
 
         receiveBonus() {
 
@@ -159,7 +152,7 @@ window.onload = () => {
 
 
 
-     //BARBARIAN SESSION
+     //ENEMY SESSION
 
     class Barbarian {
         constructor(x, y) {
@@ -172,7 +165,7 @@ window.onload = () => {
         
         update(ctx) {
 
-            ctx.drawImage(barbarianImg, this.x, this.y, 120, 200);
+            ctx.drawImage(barbarianImg, this.x, this.y, 150, 200);
         }
   
         newPosition() {
@@ -195,7 +188,7 @@ window.onload = () => {
   
     }
 
-    //BARBARIAN ANIMATION
+    //ENEMY ANIMATION
 
     function moveBarbarian() {
         
@@ -214,30 +207,43 @@ window.onload = () => {
         if (frames <= 6000) {
             
             
-            return backgroundImg.src = "./img/background1.png";
+            // return backgroundImg.src = "./img/background1.png";
+            return backgroundImg.src = "./img/newbackground1.png";
             
         } else if (frames > 6000 && frames < 18000) {
            
             
-            backgroundImg.src = "./img/background2.jpg";
+            // backgroundImg.src = "./img/background2.jpg";
+            backgroundImg.src = "./img/newbackground2.png";
 
         } else if (frames >= 18000 && frames < 30000) {
            
             
-            backgroundImg.src = "./img/background3.jpg";
+            // backgroundImg.src = "./img/background3.jpg";
+            backgroundImg.src = "./img/newbackground3.png";
 
         } else if (frames >= 30000 &&  frames < 35000) {
             
-            backgroundImg.src = "./img/background4.jpg";
+            // backgroundImg.src = "./img/background4.jpg";
+            backgroundImg.src = "./img/newbackground4.png";
 
         } else if (frames >= 35000 && frames < 40000) {
+            console.log(frames)
             
-            backgroundImg.src = "./img/background5.png";
+            // backgroundImg.src = "./img/background5.png";
+            backgroundImg.src = "./img/newbackground5.png";
 
-        } else if (frames === 40000) {
+        } else if (frames >= 40000 && frames < 45000) {
             
+            
+            backgroundImg.src = "./img/newbackground6.png";
+        } else if (frames >= 45000 && frames < 48000) {
+          
             frames = 0;
+    
+        
         }
+        
     }
 
         //SCORE 
@@ -287,7 +293,7 @@ window.onload = () => {
     let player = new Player(30, 335,10);
     
     
-    let barbarian = new Barbarian(600, 300, 60);
+    let barbarian = new Barbarian(600, 270);
 
 
    
@@ -403,7 +409,7 @@ window.onload = () => {
     } 
 
 
-        //CHECK WHICH ROCKS HAS CRASHED THE ROMAN SOLDIER TO COUNT THE DAMAGE
+        //CHECK WHICH ROCKS HAS CRASHED THE PLAYER TO COUNT THE DAMAGE
     
         let  checkQuest = () => {
             let playerX = player.x; 
@@ -428,7 +434,7 @@ window.onload = () => {
         };
         
     
-        // COUNT THE ROCKS THAT CRASHED THE SOLDIER TO CHECK DAMAGE AND SUB THE VALUE FROM HEALTH
+        // COUNT THE ROCKS THAT CRASHED THE PLAYER TO CHECK DAMAGE AND SUB THE VALUE FROM HEALTH
     
         function checkDamage() {
             
@@ -515,7 +521,7 @@ window.onload = () => {
     };
     
 
-    // COUNT THE COINS THAT THE SOLDIER  HAD GOTTEN TO CHECK BONUS AND ADD THE VALUE TO HIS HEALTH STATUS
+    // COUNT THE COINS THAT THE PLAYER HAD GOTTEN TO CHECK BONUS AND ADD THE VALUE TO HIS HEALTH STATUS
 
     function checkGetCoin() {
         
@@ -541,7 +547,7 @@ window.onload = () => {
         updateCoins();
         checkGetCoin();
         backgroundChange()
-        //audio.play();
+        audio.play();
         player.statusHealth();
         moveBarbarian();
         window.requestAnimationFrame(updateGameFrame);
@@ -577,19 +583,33 @@ window.onload = () => {
 
     function drawGameOver() {
         audio.pause();
+        audioCoins.pause();
+        audioStone.pause();
         audioGameOver.play();
         let gOverImg = new Image();
         gOverImg.src = './img/gameover.png';
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(gOverImg, 90, 0);
-
-        // setInterval(() => {
-        //     window.location.reload();
-        //   }, 700);
     };
 
- 
 
+
+     //RESTART
+
+    document.getElementById('reset-button').onclick = (event) => {      
+
+        restart();
+       
+    };   
+
+
+    function restart() {
+    
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        startGame();
+}
 
 };
-  
+
+

@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Oxanium&display=swap');
 body {
+    margin:0;
     padding: 0;
     text-align: center;
-    background-image: url("./img/newBackground-general.png");
+    background-image: url("./img/backgroundGeneralok.jpg");
     background-size: cover;
     background-color: black;
     font-family: 'Oxanium', cursive;
@@ -43,10 +44,26 @@ body {
     border-radius: 5px;
     margin-bottom: 20px;
   }
+
+  #reset-button  {
+    font-size: 20px;
+    background-color: #870007;
+    font-family: 'Oxanium', cursive;
+    color: #fff;
+    padding: 20px 40px;
+    border: 0;
+    box-shadow: 0;
+    margin-left: 30px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+
+  }
   
   #game-board {
       float: center;
       padding: 20px 0px;
+      /* display:flex;
+      flex-direction:row; */
   }
   
   canvas{
