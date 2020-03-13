@@ -99,7 +99,12 @@ window.onload = () => {
           
             barbarianImg.src = "./img/enemyCuphead.png";
 
-        } else if (frames >= 29000) {
+        } else if (frames >= 29000 && frames < 37000) {
+           
+          
+            barbarianImg.src = "./img/clownCuphead.png";
+
+        } else if (frames >= 37000) {
           
             return barbarianImg.src = './img/enemy.png';
     
@@ -262,7 +267,7 @@ window.onload = () => {
             // backgroundImg.src = "./img/background3.jpg";
             backgroundImg.src = "./img/newbackground3.png";
 
-        } else if (frames >= 30000 &&  frames < 35000) {
+        } else if (frames >= 30000 &&  frames < 38000) {
             
             // backgroundImg.src = "./img/background4.jpg";
             backgroundImg.src = "./img/newbackground4.png";
@@ -278,7 +283,7 @@ window.onload = () => {
             
         //     backgroundImg.src = "./img/newbackground6.png";
 
-        } else if (frames >= 35000) {
+        } else if (frames >= 38000) {
           
             frames = 0;
     
