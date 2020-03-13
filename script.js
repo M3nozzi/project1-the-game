@@ -596,7 +596,7 @@ window.onload = () => {
         let gameOvImg = new Image();
         gameOvImg.src = './img/gameoverOK.jpg';
         let captanImg = new Image();
-        captanImg.src= '/img/captain.png';
+        captanImg.src= './img/captain.png';
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         // ctx.drawImage(gOverImg, 90, 55);
         ctx.drawImage(gameOvImg, -250,-40);
