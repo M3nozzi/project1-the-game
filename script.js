@@ -17,7 +17,7 @@ window.onload = () => {
     let myObstacles = [];
     let myCoins = [];
     var numbers = 0;
-    // yyy
+
   
    
     //IMAGES 
