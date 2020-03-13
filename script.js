@@ -40,7 +40,7 @@ window.onload = () => {
         //BARBARIAN SOLDIER IMAGE
     
     let barbarianImg = new Image();
-    barbarianImg.src = './img/enemy.png';
+    // barbarianImg.src = './img/enemy.png';
 
         // COIN BONUS IMAGE
     
@@ -68,9 +68,45 @@ window.onload = () => {
     //AUDIO GAME OVER
     const audioGameOver = new Audio();
     audioGameOver.src = './img/gameOver.mp3';
-    audioGameOver.volume = 0.5;
+    audioGameOver.volume = 0.3;
     
 
+    //AUDIO END
+    const audioEND = new Audio();
+    audioEND.src = './img/theend.mp3';
+    audioEND.volume = 0.5;
+
+
+
+
+      //CHANGE ENEMY 
+
+      function enemyChange() {
+        
+        if (frames <= 12000) {
+            
+            
+            return barbarianImg.src = './img/enemy.png';
+            
+        } else if (frames > 12000 && frames < 18000) {
+           
+          
+            barbarianImg.src = "./img/tubaCuphead.png";
+
+        } else if (frames >= 18000 && frames < 29000) {
+           
+          
+            barbarianImg.src = "./img/enemyCuphead.png";
+
+        } else if (frames >= 29000) {
+          
+            return barbarianImg.src = './img/enemy.png';
+    
+        
+        }
+    
+        
+    }
 
 
     //PLAYER SESSION
@@ -130,7 +166,7 @@ window.onload = () => {
             ctx.fillText('Health ' + status, 200, 50);
             ctx.font = '15px Oxanium';
             ctx.fillStyle = 'red';
-            ctx.fillText('I am gonna DIE!!!!',200, 70);
+            ctx.fillText('I am gonna DIE!!!!',300, 80);
           }
           
       };
@@ -246,6 +282,7 @@ window.onload = () => {
     
         
         }
+        barbarianImg.src = './img/enemy.png';
         
     }
 
@@ -549,7 +586,8 @@ window.onload = () => {
         updateObstacles();
         updateCoins();
         checkGetCoin();
-        backgroundChange()
+        backgroundChange();
+        enemyChange();
         audio.play();
         player.statusHealth();
         moveBarbarian();
@@ -590,7 +628,9 @@ window.onload = () => {
         audio.pause();
         audioCoins.pause();
         audioStone.pause();
-        audioGameOver.play();
+        // audioGameOver.play();
+        // audioGameOver.pause();
+        audioEND.play();
         // let gOverImg = new Image();
         // gOverImg.src = './img/gameover.png';
         let gameOvImg = new Image();
@@ -598,12 +638,13 @@ window.onload = () => {
         let captanImg = new Image();
         captanImg.src= './img/captain.png';
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        // ctx.drawImage(gOverImg, 90, 55);
         ctx.drawImage(gameOvImg, -250,-40);
         ctx.drawImage(captanImg, 150, 18);
-        ctx.font = '29px Oxanium';
+        ctx.font = '34px Oxanium';
         ctx.fillStyle = 'white';
-        ctx.fillText('YOUR SCORE: ' + numbers, 250, 400);
+        ctx.fillText('YOU DIED !!!', 290, 400);
+        
+        
         
     };
 
