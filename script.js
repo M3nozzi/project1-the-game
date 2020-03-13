@@ -75,7 +75,7 @@ window.onload = () => {
     //AUDIO END
     const audioEND = new Audio();
     audioEND.src = './img/theend.mp3';
-    audioEND.volume = 0.5;
+    audioEND.volume = 0.7;
 
 
 
@@ -267,17 +267,18 @@ window.onload = () => {
             // backgroundImg.src = "./img/background4.jpg";
             backgroundImg.src = "./img/newbackground4.png";
 
-        } else if (frames >= 35000 && frames < 40000) {
-            console.log(frames)
+        // } else if (frames >= 35000 && frames < 40000) {
+        //     console.log(frames)
             
-            // backgroundImg.src = "./img/background5.png";
-            backgroundImg.src = "./img/newbackground5.png";
+        //     // backgroundImg.src = "./img/background5.png";
+        //     backgroundImg.src = "./img/newbackground5.png";
 
-        } else if (frames >= 40000 && frames < 45000) {
+        // } else if (frames >= 40000 && frames < 45000) {
             
             
-            backgroundImg.src = "./img/newbackground6.png";
-        } else if (frames >= 45000 && frames < 48000) {
+        //     backgroundImg.src = "./img/newbackground6.png";
+
+        } else if (frames >= 35000) {
           
             frames = 0;
     
