@@ -30,7 +30,7 @@ body {
   #startBt {
       float: right;
       padding: 20px 0px;
-      display:flex;
+      display:block;
       margin-right: 520px;
       margin-top: 180px;
       
