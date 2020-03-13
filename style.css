@@ -9,102 +9,244 @@ body {
     font-family: 'Oxanium', cursive;
     
   }
-  .flex-container{
-    display:flex;
-    flex-direction:column;
+  
 
-  }
-  .game-intro {
-    float: left;
-    padding: 0% 10%;
-  }
-  
-  .game-intro p {
-    font-size: 18px;
-    color: white;
-    font-weight: 600;
-    
-  }
-  
-  /* .logo-img {
-    width: 350px;
-    margin-bottom: 30px;
-    margin-top: 30px;
-  }
-   */
-  
-  #start-button{
-    font-size: 20px;
-    background-color: #870007;
-    font-family: 'Oxanium', cursive;
-    color: #fff;
-    padding: 20px 40px;
-    border: 0;
-    box-shadow: 0;
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
+  #flex-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: right;
+    height: 600px;
+    width: 800px;
+    margin: 8rem auto;
+}
 
-  #reset-button  {
-    font-size: 20px;
-    background-color: #870007;
-    font-family: 'Oxanium', cursive;
-    color: #fff;
-    padding: 20px 40px;
-    border: 0;
-    box-shadow: 0;
-    margin-left: 30px;
-    border-radius: 5px;
-    margin-bottom: 20px;
+  #text{
 
+    float:left;
+    margin-left: 250px;
   }
   
-  #game-board {
-      float: center;
+  #startBt {
+      float: right;
       padding: 20px 0px;
-      /* display:flex;
-      flex-direction:row; */
+      display:flex;
+      margin-right: 520px;
+      margin-top: 180px;
+      
   }
   
+#buttonsLR {
+   display:flex;
+   padding: 20px 0px;
+    float:left;
+    margin-left: 200px;
+}
+
   canvas{
+    display:block;
     border: 2px solid white;
-    margin-top: 100px;
+    margin-top: 20px;
     margin-bottom: 10px;
+    margin-left: 30px;
+  }
+
+
+
+#start-button {
+    min-width: 150px;
+    min-height: 60px;
+    font-family: 'Oxanium', cursive;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+    color: white;
+    background: #870007;
+    border: none;
+    border-radius: 1000px;
+    box-shadow: 12px 12px 24px #870007;
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    padding: 10px;
+    }
+  
+#start-button::before {
+  content: '';
+    border-radius: 1000px;
+    min-width: calc(150px + 12px);
+    min-height: calc(60px + 12px);
+    border: 6px solid  #870007;
+    box-shadow: 0 0 60px #870007;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all .3s ease-in-out 0s;
   }
   
-
-  #buttonMoveLeft{
-    /* float: left;
-    position:center; */
-    justify-content: center;
-    padding: 20px 40px;
-    border: 0;
-    box-shadow: 0;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    background-color: #870007;
-    font-size: 20px;
-    font-family: 'Oxanium', cursive;
+  #start-button:hover, .button:focus {
     color: white;
-}
+    transform: translateY(-6px);
+  }
 
-  #buttonMoveRight{
-    /* float: left;
-    position: absolute; */
-    justify-content: center;
-    padding: 20px 40px;
-    border: 0;
-    box-shadow: 0;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    margin-left:30px;
-    background-color: #870007;
-    font-size: 20px;
+  #start-button:hover::before, button:focus::before {
+    opacity: 1;
+  }
+
+  
+
+  /* #reset-button {
+    min-width: 150px;
+    min-height: 60px;
     font-family: 'Oxanium', cursive;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-weight: 700;
     color: white;
-}
+    background: #870007;
+    border: none;
+    border-radius: 1000px;
+    box-shadow: 12px 12px 24px #870007;
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    padding: 10px;
+    }
+  
+#reset-button::before {
+  content: '';
+    border-radius: 1000px;
+    min-width: calc(150px + 12px);
+    min-height: calc(60px + 12px);
+    border: 6px solid  #870007;
+    box-shadow: 0 0 60px #870007;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all .3s ease-in-out 0s;
+  }
+  
+  #reset-button:hover, .button:focus {
+    color:white;
+    transform: translateY(-6px);
+  }
 
-@media screen and (max-width:959px){
+  #reset-button:hover::before, button:focus::before {
+    opacity: 1;
+  } */
+
+
+
+
+
+
+
+
+#buttonMoveRight {
+    min-width: 150px;
+    min-height: 60px;
+    font-family: 'Oxanium', cursive;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+    color: #313133;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgb(254, 255, 255) 0%, rgb(213, 250, 246) 100%);
+    border: none;
+    border-radius: 1000px;
+    box-shadow: 12px 12px 24px #870007;
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    padding: 10px;
+    margin-left: 20px;
+    }
+  
+    #buttonMoveRight::before {
+  content: '';
+    border-radius: 1000px;
+    min-width: calc(150px + 12px);
+    min-height: calc(60px + 12px);
+    border: 6px solid  #870007;
+    box-shadow: 0 0 60px #870007;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all .3s ease-in-out 0s;
+  }
+  
+  #buttonMoveRight:hover, .button:focus {
+    color: #313133;
+    transform: translateY(-6px);
+  }
+  
+  #buttonMoveRight:hover::before, button:focus::before {
+    opacity: 1;
+  }
+
+
+
+
+
+
+  #buttonMoveLeft {
+    min-width: 150px;
+    min-height: 60px;
+    font-family: 'Oxanium', cursive;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+    color: #313133;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgb(254, 255, 255) 0%, rgb(213, 250, 246) 100%);
+    border: none;
+    border-radius: 1000px;
+    box-shadow: 12px 12px 24px #870007;
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    padding: 10px;
+    }
+  
+    #buttonMoveLeft::before {
+  content: '';
+    border-radius: 1000px;
+    min-width: calc(150px + 12px);
+    min-height: calc(60px + 12px);
+    border: 6px solid  #870007;
+    box-shadow: 0 0 60px #870007;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all .3s ease-in-out 0s;
+  }
+  
+  #buttonMoveLeft:hover, .button:focus {
+    color: #313133;
+    transform: translateY(-6px);
+  }
+  
+  #buttonMoveLeft:hover::before, button:focus::before {
+    opacity: 1;
+  }
+
+  @media screen and (max-width:959px){
 
     #flex-container{
         width: 100%;

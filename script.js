@@ -2,9 +2,10 @@ window.onload = () => {
 
 
 
-    document.getElementById('start-button').onclick = (event) => {      
+    document.getElementById('start-button').onclick = () => {      
     
         startGame();
+        
     };    //START THE GAME BEFORE CLICK ON THE BUTTON
   
     
@@ -15,6 +16,8 @@ window.onload = () => {
     let frames = 0;
     let myObstacles = [];
     let myCoins = [];
+    var numbers = 0;
+  
    
     //IMAGES 
 
@@ -112,22 +115,22 @@ window.onload = () => {
         var status = this.health;
         ctx.font = '29px Oxanium';
         ctx.fillStyle = 'black';
-          ctx.fillText('Health ' + status, 100, 50);
+          ctx.fillText('Health ' + status, 200, 50);
           
            if (status <= 5 && status > 1) {
                 
             ctx.font = '29px Oxanium';
             ctx.fillStyle = 'red';
-            ctx.fillText('Health ' + status, 100, 50);
+            ctx.fillText('Health ' + status, 200, 50);
 
            } else if (status === 1) {
                
             ctx.font = '29px Oxanium';
             ctx.fillStyle = 'red';
-            ctx.fillText('Health ' + status, 100, 50);
+            ctx.fillText('Health ' + status, 200, 50);
             ctx.font = '15px Oxanium';
             ctx.fillStyle = 'red';
-            ctx.fillText('I am gonna DIE!!!!',100, 70);
+            ctx.fillText('I am gonna DIE!!!!',200, 70);
           }
           
       };
@@ -249,10 +252,10 @@ window.onload = () => {
         //SCORE 
     
     function score() {
-    var numbers = Math.floor(frames / 1000);
+    numbers = Math.floor(frames / 1000);
     ctx.font = '29px Oxanium';
     ctx.fillStyle = 'black';
-    ctx.fillText('SCORE  ' + numbers, 300, 50);
+    ctx.fillText('SCORE  ' + numbers, 380, 50);
     };
   
 
@@ -349,11 +352,11 @@ window.onload = () => {
         } else {
             player.speedX -= 1;
         }
-        // player.speedX -= 1;
+
         event.target.disabled = true;
         event.target.disabled = false;
         setTimeout( player.speedX *= 0.5, 500);
-        // setTimeout( player.speedY *= 0.5, 500);
+      
       };
     
     buttonMoveRight.onclick = (event) => {
@@ -362,11 +365,11 @@ window.onload = () => {
         } else {
           player.speedX += 1;
         }
-        // player.speedX += 1;
+       
         event.target.disabled = true;
         event.target.disabled = false;
         setTimeout( player.speedX *= 0.5, 500);
-        // setTimeout( player.speedY *= 0.5, 500);
+    
       };
    
     
@@ -575,8 +578,10 @@ window.onload = () => {
     function checkGameOver() {
 
         if (player.health <= 0) {
-            window.cancelAnimationFrame(updateGameFrame);
             drawGameOver();
+            setTimeout(() => cancelAnimationFrame(updateGameFrame), 200);
+            // window.cancelAnimationFrame(updateGameFrame);
+            
           }
 
     };
@@ -586,40 +591,53 @@ window.onload = () => {
         audioCoins.pause();
         audioStone.pause();
         audioGameOver.play();
-        let gOverImg = new Image();
-        gOverImg.src = './img/gameover.png';
+        // let gOverImg = new Image();
+        // gOverImg.src = './img/gameover.png';
+        let gameOvImg = new Image();
+        gameOvImg.src = './img/gameoverOK.jpg';
+        let captanImg = new Image();
+        captanImg.src= '/img/captain.png';
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(gOverImg, 90, 0);
+        // ctx.drawImage(gOverImg, 90, 55);
+        ctx.drawImage(gameOvImg, -250,-40);
+        ctx.drawImage(captanImg, 150, 18);
+        ctx.font = '29px Oxanium';
+        ctx.fillStyle = 'white';
+        ctx.fillText('YOUR SCORE: ' + numbers, 250, 400);
+        
     };
 
 
 
      //RESTART
 
-    document.getElementById('reset-button').onclick = (event) => {      
+    // document.getElementById('reset-button').onclick = (event) => {      
 
-        restart();
+    //     restart();
        
-    };   
+    // };   
 
 
-    function restart() { 
+    // function restart() { 
     
-        if (drawGameOver) {
+    //     if (drawGameOver) {
+    //         ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //         setTimeout(() => cancelAnimationFrame(updateGameFrame), 200);
+    //         frames = 0;
+    //         myObstacles = [];
+    //         myCoins = [];
+    //         player.x = 30;
+    //         player.y = 335;
+    //         player.health= 10;
+    //         barbarian.x = 600;
+    //         barbarian.y = 270;
             
-            player.x = 30;
-            player.y = 335;
-            player.health= 10;
-            barbarian.x = 600;
-            barbarian.y = 270;
-            frame = 0;
-            myObstacles = [];
-            myCoins = [];
+            
 
-            startGame();
-        }
-        
-    }
+            
+    //     }
+    //     startGame();
+    // }
 
 };
 
