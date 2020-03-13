@@ -302,7 +302,7 @@ window.onload = () => {
     ctx.fillText('SCORE  ' + numbers, 380, 50);
     };
   
-    //teste
+    
 
    
 
